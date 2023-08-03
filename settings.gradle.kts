@@ -1,4 +1,4 @@
-rootProject.name = "modelix"
+rootProject.name = "modelix-mps"
 
 pluginManagement {
     repositories {
