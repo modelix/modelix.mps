@@ -29,15 +29,15 @@ jdom = { group = "org.jdom", name = "jdom", version = "2.0.2" }
 
 # modelix
 modelix-modelserverincldependencies = { group = "org.modelix", name = "model-server-with-dependencies", version.ref = "modelix.core" }
+modelix-model-server-api = { group = "org.modelix", name = "model-server-api", version.ref = "modelix.core" }
+modelix-model-client = { group = "org.modelix", name = "model-client", version.ref = "modelix.core" }
+modelix-model-server-lib = { group = "org.modelix", name = "model-server-lib", version.ref = "modelix.core" }
+modelix-light-model-client = { group = "org.modelix", name = "light-model-client", version.ref = "modelix.core" }
+
 
 ## modelix-syncPlugin = { group = "org.modelix.mps", name = "model-server-sync-plugin", version.ref = "mpsModelServerSyncPlugin" }
-## modelix-model-server-api = { group = "org.modelix", name = "model-server-api", version.ref = "modelixCore" }
-## modelix-model-client = { group = "org.modelix", name = "model-client", version.ref = "modelixCore" }
 ## modelix-model-api = { group = "org.modelix", name = "model-api", version.ref = "modelixCore" }
 ## modelix-model-api-gen-runtime = { group = "org.modelix", name = "model-api-gen-runtime", version.ref = "modelixCore" }
-## modelix-light-model-client = { group = "org.modelix", name = "light-model-client", version.ref = "modelixCore" }
-
-
 
 
 

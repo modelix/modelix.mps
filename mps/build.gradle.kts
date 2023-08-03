@@ -100,10 +100,10 @@ val lightModelServer: Configuration by configurations.creating
 val lightModelClient: Configuration by configurations.creating
 
 dependencies {
-    modelApi("org.modelix:model-api:$modelixCoreVersion")
-    modelClient("org.modelix:model-client:$modelixCoreVersion")
-    lightModelServer("org.modelix:model-server-lib:$modelixCoreVersion")
-    lightModelClient("org.modelix:light-model-client:$modelixCoreVersion")
+    modelApi(libs.modelix.model.server.api)
+    modelClient(libs.modelix.model.client)
+    lightModelServer(libs.modelix.model.server.lib)
+    lightModelClient(libs.modelix.light.model.client)
 }
 
 fun artifactNameWithoutVersion(artifact: ResolvedArtifact) : String {
@@ -176,6 +176,7 @@ val generateMpsBuildScript by tasks.registering(BuildLanguages::class) {
     dependsOn(
         resolveMps,
         resolveMpsArtifacts,
+            // TODO
         ":ui-client:packageNpmApp",
         copyJarsToMps
     )
