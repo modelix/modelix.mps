@@ -100,7 +100,7 @@ val lightModelServer: Configuration by configurations.creating
 val lightModelClient: Configuration by configurations.creating
 
 dependencies {
-    modelApi(libs.modelix.model.server.api)
+    modelApi(libs.modelix.model.api)
     modelClient(libs.modelix.model.client)
     lightModelServer(libs.modelix.model.server.lib)
     lightModelClient(libs.modelix.light.model.client)
@@ -140,6 +140,7 @@ fun copyJarsDelta(conf: Configuration, excludedConf: Configuration, libFolder: F
     }
 }
 
+// todo did this run?
 val copyModelClientToMps by tasks.registering {
     dependsOn(modelApi)
     dependsOn(modelClient)
