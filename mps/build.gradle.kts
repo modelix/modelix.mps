@@ -1,4 +1,3 @@
-
 //import org.apache.tools.ant.taskdefs.condition.Os
 import de.itemis.mps.gradle.BuildLanguages
 import de.itemis.mps.gradle.GenerateLibrariesXml
@@ -16,7 +15,7 @@ plugins {
 val antLib: Configuration by configurations.creating
 val mps: Configuration by configurations.creating
 val mpsArtifacts: Configuration by configurations.creating
-val libs: Configuration by configurations.creating
+val extraLibs: Configuration by configurations.creating
 val modelServer: Configuration by configurations.creating
 
 fun scriptFile(relativePath: String) {
@@ -28,16 +27,17 @@ val libsDir = File(rootDir, "libs")
 val mpsDir = File(artifactsDir, "mps")
 val modelServerDir = File(artifactsDir, "model-server")
 
-val mpsVersion: String by rootProject
-val mpsExtensionsVersion: String by rootProject
-val modelixCoreVersion: String by rootProject
+val mpsVersion = libs.versions.mpsbase
+val mpsExtensionsVersion = libs.versions.mpsbase.extensions
+
+val modelixCoreVersion = libs.versions.modelix.core
 
 dependencies {
-    antLib("org.apache.ant:ant-junit:1.10.1")
-    mps("com.jetbrains:mps:$mpsVersion")
-    mpsArtifacts("de.itemis.mps:extensions:$mpsExtensionsVersion")
-    libs("org.jdom:jdom:2.0.2")
-    modelServer("org.modelix:model-server-with-dependencies:$modelixCoreVersion")
+    antLib(libs.ant.junit)
+    mps(libs.mps)
+    mpsArtifacts(libs.mps.extensions)
+    extraLibs(libs.jdom)
+    modelServer(libs.modelix.modelserverincldependencies)
 }
 
 val generateLibrariesXml by tasks.registering(GenerateLibrariesXml::class) {
@@ -51,7 +51,7 @@ tasks.register<Copy>("resolveLibs") {
     doFirst {
         delete(libsDir)
     }
-    from(libs.resolve())
+    from(extraLibs.resolve())
     into(libsDir)
 }
 
