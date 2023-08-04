@@ -12,12 +12,12 @@ plugins {
     java
     `maven-publish`
 }
+
 val antLib: Configuration by configurations.creating
 val mps: Configuration by configurations.creating
 val mpsArtifacts: Configuration by configurations.creating
 val extraLibs: Configuration by configurations.creating
 val modelServer: Configuration by configurations.creating
-
 
 fun scriptFile(relativePath: String) {
     File("$rootDir/build/$relativePath")
@@ -30,7 +30,6 @@ val modelServerDir = File(artifactsDir, "model-server")
 
 val mpsVersion = libs.versions.mpsbase
 val mpsExtensionsVersion = libs.versions.mpsbase.extensions
-
 val modelixCoreVersion = libs.versions.modelix.core
 
 dependencies {

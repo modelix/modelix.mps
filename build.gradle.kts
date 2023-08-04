@@ -18,9 +18,9 @@ buildscript {
 
 plugins {
     `maven-publish`
-    alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.kotlin.multiplatform) apply false
-    alias(libs.plugins.kotlin.serialization) apply false
+//    alias(libs.plugins.kotlin.jvm) apply false
+//    alias(libs.plugins.kotlin.multiplatform) apply false
+//    alias(libs.plugins.kotlin.serialization) apply false
     // id("com.diffplug.gradle.spotless") version "4.5.1" apply false
 }
 
