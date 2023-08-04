@@ -17,6 +17,7 @@ val mps: Configuration by configurations.creating
 val mpsArtifacts: Configuration by configurations.creating
 val extraLibs: Configuration by configurations.creating
 val modelServer: Configuration by configurations.creating
+val jersey: Configuration by configurations.creating
 
 fun scriptFile(relativePath: String) {
     File("$rootDir/build/$relativePath")
@@ -38,6 +39,10 @@ dependencies {
     mpsArtifacts(libs.mps.extensions)
     extraLibs(libs.jdom)
     modelServer(libs.modelix.modelserverincldependencies)
+    jersey(libs.jersey.inject)
+    jersey(libs.jersey.media)
+    jersey(libs.jakarta.xml.bind)
+    jersey(libs.jakarta.activation)
 }
 
 val generateLibrariesXml by tasks.registering(GenerateLibrariesXml::class) {
@@ -48,6 +53,7 @@ val generateLibrariesXml by tasks.registering(GenerateLibrariesXml::class) {
 }
 
 tasks.register<Copy>("resolveLibs") {
+    dependsOn(resolveJersey)
     doFirst {
         delete(libsDir)
     }
@@ -58,6 +64,13 @@ tasks.register<Copy>("resolveLibs") {
 val resolveMps by tasks.registering(Copy::class) {
     from(mps.resolve().map { zipTree(it) })
     into(mpsDir)
+}
+
+val resolveJersey by tasks.registering(Copy::class) {
+    println(jersey.resolve().toString().replace(",","\n"))
+    from(jersey.resolve())
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    into(file("$projectDir/org.modelix.jersey/lib/"))
 }
 
 val resolveModelServer by tasks.registering(Copy::class) {
@@ -140,7 +153,6 @@ fun copyJarsDelta(conf: Configuration, excludedConf: Configuration, libFolder: F
     }
 }
 
-// todo did this run?
 val copyModelClientToMps by tasks.registering {
     dependsOn(modelApi)
     dependsOn(modelClient)
