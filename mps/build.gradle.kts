@@ -17,8 +17,7 @@ val mps: Configuration by configurations.creating
 val mpsArtifacts: Configuration by configurations.creating
 val extraLibs: Configuration by configurations.creating
 val modelServer: Configuration by configurations.creating
-val jersey: Configuration by configurations.creating
-//val jetty: Configuration by configurations.creating
+
 
 fun scriptFile(relativePath: String) {
     File("$rootDir/build/$relativePath")
@@ -40,11 +39,6 @@ dependencies {
     mpsArtifacts(libs.mps.extensions)
     extraLibs(libs.jdom)
     modelServer(libs.modelix.modelserverincldependencies)
-    jersey(libs.jersey.inject)
-    jersey(libs.jersey.media)
-    jersey(libs.jakarta.xml.bind)
-    jersey(libs.jakarta.activation)
-//    jetty(libs.jetty.server)
 }
 
 val generateLibrariesXml by tasks.registering(GenerateLibrariesXml::class) {
@@ -54,10 +48,7 @@ val generateLibrariesXml by tasks.registering(GenerateLibrariesXml::class) {
     setOverrides(rootProject.file("projectlibraries.overrides.properties"))
 }
 
-tasks.register<Copy>("resolveLibs") {
-    dependsOn(resolveJersey)
-    // todo: obtain all jetty libs via gradle
-//    dependsOn(resolveJetty)
+val resolveLibs by tasks.registering(Copy::class) {
     doFirst {
         delete(libsDir)
     }
@@ -69,18 +60,6 @@ val resolveMps by tasks.registering(Copy::class) {
     from(mps.resolve().map { zipTree(it) })
     into(mpsDir)
 }
-
-val resolveJersey by tasks.registering(Copy::class) {
-    from(jersey.resolve())
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    into(file("$projectDir/org.modelix.jersey/lib/"))
-}
-//val resolveJetty by tasks.registering(Copy::class) {
-//    println(jetty.resolve().toString().replace(",","\n"))
-//    from(jetty.resolve())
-//    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-//    into(file("$projectDir/org.modelix.jetty/lib/"))
-//}
 
 val resolveModelServer by tasks.registering(Copy::class) {
     dependsOn(modelServer)
@@ -120,12 +99,20 @@ val modelApi: Configuration by configurations.creating
 val modelClient: Configuration by configurations.creating
 val lightModelServer: Configuration by configurations.creating
 val lightModelClient: Configuration by configurations.creating
+val jersey: Configuration by configurations.creating
+//val jetty: Configuration by configurations.creating
 
 dependencies {
     modelApi(libs.modelix.model.api)
     modelClient(libs.modelix.model.client)
     lightModelServer(libs.modelix.model.server.lib)
     lightModelClient(libs.modelix.light.model.client)
+
+    jersey(libs.jersey.inject)
+    jersey(libs.jersey.media)
+    jersey(libs.jakarta.xml.bind)
+    jersey(libs.jakarta.activation)
+//    jetty(libs.jetty.server)
 }
 
 fun artifactNameWithoutVersion(artifact: ResolvedArtifact) : String {
@@ -186,7 +173,23 @@ val copyLightModelClientToMps by tasks.registering {
     }
 }
 
+val copyJerseyLibsToMps by tasks.registering(Copy::class) {
+    from(jersey.resolve())
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    into(file("$projectDir/org.modelix.jersey/lib/"))
+}
+//val copyJettyLibsToMps by tasks.registering(Copy::class) {
+//    println(jetty.resolve().toString().replace(",","\n"))
+//    from(jetty.resolve())
+//    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+//    into(file("$projectDir/org.modelix.jetty/lib/"))
+//}
+
 val copyJarsToMps by tasks.registering {
+    dependsOn(copyJerseyLibsToMps)
+    // todo: obtain all jetty libs via gradle
+//    dependsOn(copyJettyLibsToMps)
+
     dependsOn(copyModelClientToMps)
     dependsOn(copyLightModelServerToMps)
     dependsOn(copyLightModelClientToMps)
