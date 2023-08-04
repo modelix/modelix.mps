@@ -226,7 +226,7 @@ tasks.named("assemble") {
 }
 
 val runMpsTests by tasks.registering(TestLanguages::class) {
-    dependsOn(buildMpsModules)
+//    dependsOn(buildMpsModules)
     scriptArgs = defaultAntScriptArgs
     scriptClasspath = buildScriptClasspath
     script = File("$rootDir/build/test.org.modelix/build-tests.xml")
