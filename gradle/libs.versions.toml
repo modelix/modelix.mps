@@ -15,6 +15,8 @@ lib-jersey = "2.29.1"
 lib-jakarta-xml = "2.3.2"
 lib-jakarta-activation = "1.2.1"
 
+lib-jetty-server = "9.4.20.v20190813"
+
 [plugins]
 
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -30,10 +32,15 @@ mps-extensions = { group = "de.itemis.mps", name = "extensions", version.ref = "
 
 ant-junit = { group = "org.apache.ant", name = "ant-junit", version = "1.10.1" }
 jdom = { group = "org.jdom", name = "jdom", version = "2.0.2" }
+
+# jersey
 jersey-inject = { group = "org.glassfish.jersey.inject", name = "jersey-hk2", version.ref = "lib-jersey" }
 jersey-media = { group = "org.glassfish.jersey.media", name = "jersey-media-sse", version.ref = "lib-jersey" }
 jakarta-xml-bind = { group = "jakarta.xml.bind", name = "jakarta.xml.bind-api", version.ref = "lib-jakarta-xml" }
 jakarta-activation = { group = "com.sun.activation", name = "jakarta.activation", version.ref = "lib-jakarta-activation" }
+
+# jetty
+
 
 # modelix
 modelix-modelserverincldependencies = { group = "org.modelix", name = "model-server-with-dependencies", version.ref = "modelix.core" }
