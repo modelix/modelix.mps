@@ -12,16 +12,11 @@ buildscript {
 
     dependencies {
         classpath("de.itemis.mps:mps-gradle-plugin:1.17.354.e921726")
-        // classpath("com.google.googlejavaformat:google-java-format:1.8+")
     }
 }
 
 plugins {
     `maven-publish`
-//    alias(libs.plugins.kotlin.jvm) apply false
-//    alias(libs.plugins.kotlin.multiplatform) apply false
-//    alias(libs.plugins.kotlin.serialization) apply false
-    // id("com.diffplug.gradle.spotless") version "4.5.1" apply false
 }
 
 
@@ -30,10 +25,6 @@ plugins {
 //
 group = "org.modelix"
 description = "modelix components providing MPS interoperation"
-val mpsVersion = libs.versions.mpsbase
-//val mpsMajorVersion = libs.versions.mpsbase.major
-//val mpsMinorVersion = libs.versions.mpsbase.minor
-val mpsExtensionsVersion = libs.versions.mpsbase.extensions
 
 fun getAndWriteModelixVersion(): String {
     lateinit var modelixVersion: String
@@ -41,7 +32,7 @@ fun getAndWriteModelixVersion(): String {
     modelixVersion = if (versionFile.exists()) {
         versionFile.readText().trim()
     } else {
-        "$mpsVersion-" + SimpleDateFormat("yyyyMMddHHmm").format(java.util.Date()) + "-SNAPSHOT"
+        "${libs.versions.mpsbase.asProvider().get()}-" + SimpleDateFormat("yyyyMMddHHmm").format(java.util.Date()) + "-SNAPSHOT"
     }
     versionFile.writeText(modelixVersion)
     return modelixVersion
