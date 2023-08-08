@@ -28,10 +28,6 @@ val libsDir = File(rootDir, "libs")
 val mpsDir = File(artifactsDir, "mps")
 val modelServerDir = File(artifactsDir, "model-server")
 
-val mpsVersion = libs.versions.mpsbase
-val mpsExtensionsVersion = libs.versions.mpsbase.extensions
-val modelixCoreVersion = libs.versions.modelix.core
-
 dependencies {
     antLib(libs.ant.junit)
     mps(libs.mps)
