@@ -1,4 +1,4 @@
-name: BuildAll
+name: Build
 
 on:
   # build on pushes to release brannches
