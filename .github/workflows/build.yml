@@ -1,10 +1,14 @@
 name: BuildAll
 
 on:
+  # build on pushes to release brannches
   push:
     branches:
       - 'mps/20**'
-  pull_request: {}
+      
+  # build on new PRs
+  pull_request:
+  
   # allow manual execution just in case
   workflow_dispatch:
 
