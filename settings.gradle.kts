@@ -10,3 +10,4 @@ pluginManagement {
 }
 
 include("mps")
+include("ui-client")

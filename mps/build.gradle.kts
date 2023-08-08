@@ -1,4 +1,3 @@
-
 //import org.apache.tools.ant.taskdefs.condition.Os
 import de.itemis.mps.gradle.BuildLanguages
 import de.itemis.mps.gradle.GenerateLibrariesXml
@@ -13,10 +12,11 @@ plugins {
     java
     `maven-publish`
 }
+
 val antLib: Configuration by configurations.creating
 val mps: Configuration by configurations.creating
 val mpsArtifacts: Configuration by configurations.creating
-val libs: Configuration by configurations.creating
+val extraLibs: Configuration by configurations.creating
 val modelServer: Configuration by configurations.creating
 
 fun scriptFile(relativePath: String) {
@@ -28,16 +28,16 @@ val libsDir = File(rootDir, "libs")
 val mpsDir = File(artifactsDir, "mps")
 val modelServerDir = File(artifactsDir, "model-server")
 
-val mpsVersion: String by rootProject
-val mpsExtensionsVersion: String by rootProject
-val modelixCoreVersion: String by rootProject
+val mpsVersion = libs.versions.mpsbase
+val mpsExtensionsVersion = libs.versions.mpsbase.extensions
+val modelixCoreVersion = libs.versions.modelix.core
 
 dependencies {
-    antLib("org.apache.ant:ant-junit:1.10.1")
-    mps("com.jetbrains:mps:$mpsVersion")
-    mpsArtifacts("de.itemis.mps:extensions:$mpsExtensionsVersion")
-    libs("org.jdom:jdom:2.0.2")
-    modelServer("org.modelix:model-server-with-dependencies:$modelixCoreVersion")
+    antLib(libs.ant.junit)
+    mps(libs.mps)
+    mpsArtifacts(libs.mps.extensions)
+    extraLibs(libs.jdom)
+    modelServer(libs.modelix.modelserverincldependencies)
 }
 
 val generateLibrariesXml by tasks.registering(GenerateLibrariesXml::class) {
@@ -47,11 +47,11 @@ val generateLibrariesXml by tasks.registering(GenerateLibrariesXml::class) {
     setOverrides(rootProject.file("projectlibraries.overrides.properties"))
 }
 
-tasks.register<Copy>("resolveLibs") {
+val resolveLibs by tasks.registering(Copy::class) {
     doFirst {
         delete(libsDir)
     }
-    from(libs.resolve())
+    from(extraLibs.resolve())
     into(libsDir)
 }
 
@@ -98,12 +98,20 @@ val modelApi: Configuration by configurations.creating
 val modelClient: Configuration by configurations.creating
 val lightModelServer: Configuration by configurations.creating
 val lightModelClient: Configuration by configurations.creating
+val jersey: Configuration by configurations.creating
+//val jetty: Configuration by configurations.creating
 
 dependencies {
-    modelApi("org.modelix:model-api:$modelixCoreVersion")
-    modelClient("org.modelix:model-client:$modelixCoreVersion")
-    lightModelServer("org.modelix:model-server-lib:$modelixCoreVersion")
-    lightModelClient("org.modelix:light-model-client:$modelixCoreVersion")
+    modelApi(libs.modelix.model.api)
+    modelClient(libs.modelix.model.client)
+    lightModelServer(libs.modelix.model.server.lib)
+    lightModelClient(libs.modelix.light.model.client)
+
+    jersey(libs.jersey.inject)
+    jersey(libs.jersey.media)
+    jersey(libs.jakarta.xml.bind)
+    jersey(libs.jakarta.activation)
+//    jetty(libs.jetty.server)
 }
 
 fun artifactNameWithoutVersion(artifact: ResolvedArtifact) : String {
@@ -164,7 +172,23 @@ val copyLightModelClientToMps by tasks.registering {
     }
 }
 
+val copyJerseyLibsToMps by tasks.registering(Copy::class) {
+    from(jersey.resolve())
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    into(file("$projectDir/org.modelix.jersey/lib/"))
+}
+//val copyJettyLibsToMps by tasks.registering(Copy::class) {
+//    println(jetty.resolve().toString().replace(",","\n"))
+//    from(jetty.resolve())
+//    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+//    into(file("$projectDir/org.modelix.jetty/lib/"))
+//}
+
 val copyJarsToMps by tasks.registering {
+    dependsOn(copyJerseyLibsToMps)
+    // todo: obtain all jetty libs via gradle
+//    dependsOn(copyJettyLibsToMps)
+
     dependsOn(copyModelClientToMps)
     dependsOn(copyLightModelServerToMps)
     dependsOn(copyLightModelClientToMps)
@@ -176,6 +200,7 @@ val generateMpsBuildScript by tasks.registering(BuildLanguages::class) {
     dependsOn(
         resolveMps,
         resolveMpsArtifacts,
+            // TODO
         ":ui-client:packageNpmApp",
         copyJarsToMps
     )
