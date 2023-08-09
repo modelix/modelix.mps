@@ -9,7 +9,7 @@
   <imports>
     <import index="jgjw" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.security(JDK/)" />
     <import index="7x5y" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.nio.charset(JDK/)" />
-    <import index="eaz0" ref="c740997f-28c0-47e8-9b5a-e87dfdb17a21/java:javax.xml.bind(de.q60.mps.web.jersey/)" />
+    <import index="eaz0" ref="c740997f-28c0-47e8-9b5a-e87dfdb17a21/java:javax.xml.bind(org.modelix.jersey/)" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" />
     <import index="mhbf" ref="8865b7a8-5271-43d3-884c-6fd1d9cfdd34/java:org.jetbrains.mps.openapi.model(MPS.OpenAPI/)" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
