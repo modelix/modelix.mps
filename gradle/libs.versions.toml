@@ -5,7 +5,7 @@ kotlin = "1.8.22"
 modelix-core = "2.10.5"
 
 # MPS - specific for each MPS version/branch
-mpsbase = "2020.3.6"
+mpsbase = "2022.3"
 mpsbase-major = "2020.3"
 mpsbase-minor = "6"
 mpsbase-extensions = "2020.3.2567.a1f3875"
