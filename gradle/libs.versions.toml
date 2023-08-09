@@ -8,7 +8,7 @@ modelix-core = "2.10.5"
 mpsbase = "2020.3.6"
 mpsbase-major = "2020.3"
 mpsbase-minor = "6"
-mpsbase-extensions = "2020.3.2567.a1f3875"
+mpsbase-extensions = "2022.3.2590.5d96c3e"
 
 # jersey related
 lib-jersey = "2.29.1"
