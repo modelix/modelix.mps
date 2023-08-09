@@ -5,10 +5,10 @@ kotlin = "1.8.22"
 modelix-core = "2.10.5"
 
 # MPS - specific for each MPS version/branch
-mpsbase = "2021.1.4"
-mpsbase-major = "2021.1"
-mpsbase-minor = "4"
-mpsbase-extensions = "2021.1.2568.3619010"
+mpsbase = "2021.2.5"
+mpsbase-major = "2"
+mpsbase-minor = "5"
+mpsbase-extensions = "2021.2.2569.a5e1b8d"
 
 # jersey related
 lib-jersey = "2.29.1"
