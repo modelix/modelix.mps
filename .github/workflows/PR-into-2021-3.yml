@@ -29,7 +29,12 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           
           # actual merge operation
-          git merge --no-ff --message "Merge 2021.2 -> 2021.3" origin/mps/2021.2 --
+          git merge --no-ff origin/mps/2021.2 --
+          git checkout --ours -- conflictTest.file
+          git add conflictTest.file
+          git status
+          git add -u
+          git commit --message "Merge 2021.2 -> 2021.3" || true
 
       # actually merge from the previous branch
       - name: Prepare environment variables for PR
