@@ -1,4 +1,5 @@
 name: Build
+run-name: Build
 
 on:
   # build on pushes to release brannches
@@ -8,7 +9,7 @@ on:
       
   # build on new PRs
   pull_request:
-  
+
   # allow manual execution just in case
   workflow_dispatch:
 
