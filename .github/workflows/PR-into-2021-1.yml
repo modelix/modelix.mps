@@ -6,8 +6,6 @@ on:
       - closed
     branches:
       - 'mps/2020.3'      
-  # allow manual execution
-  workflow_dispatch:
 
 jobs:
   merge-and-PR-into-2021-1:
@@ -30,14 +28,14 @@ jobs:
           # setup to allow to merge and commit
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-                              
+          
           # actual merge operation
           git merge --no-ff origin/mps/2020.3 --
-          git checkout --ours -- gradle/libs.versions.toml
-          git add gradle/libs.versions.toml
+          git checkout --ours -- conflictTest.file
+          git add conflictTest.file
           git status
           git add -u
-          git commit --message "Merge 2020.3 -> 2021.1"
+          git commit --message "Merge 2020.3 -> 2021.1" || true
 
       # create a PR based on the merge
       - name: Create PR for MPS 2021.1
