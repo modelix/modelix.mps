@@ -17,7 +17,7 @@ lib-jetty-server = "9.4.20.v20190813"
 # other
 jdom = "2.0.2"
 ant-junit = "1.10.1"
-nodeGradle = "2.2.4"
+nodeGradle = "5.0.0"
 
 [libraries]
 
