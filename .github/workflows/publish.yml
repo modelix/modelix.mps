@@ -1,9 +1,14 @@
 name: Publish
+run-name: Publish
 
 on:
-  push:
-    tags:
-      - 'mps/**'
+  # release on tagging
+  #push:
+  #  tags:
+  #    - 'mps/20**'
+
+  # allow manual execution just in case
+  workflow_dispatch:
 
 jobs:
   newRelease:

@@ -11,7 +11,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("de.itemis.mps:mps-gradle-plugin:1.17.354.e921726")
+        classpath(libs.itemis.mps.gradle.plugin)
     }
 }
 
@@ -19,10 +19,10 @@ plugins {
     `maven-publish`
 }
 
-
 //
 // project details
 //
+
 group = "org.modelix"
 description = "modelix components providing MPS interoperation"
 
@@ -37,12 +37,16 @@ fun getAndWriteModelixVersion(): String {
     versionFile.writeText(modelixVersion)
     return modelixVersion
 }
+
 version = getAndWriteModelixVersion()
-println("Version: " + version)
+println("Version of this project: ${version}")
+println("Version of MPS used in this project: ${libs.versions.mpsbase.asProvider().get()}")
+println("Version of MPS extension used in this project: ${libs.versions.mpsbase.extensions.get()}")
 
 //
 // subproject configuration
 //
+
 subprojects {
     apply(plugin = "maven-publish")
 
@@ -72,16 +76,17 @@ subprojects {
             }
             maven {
                 name = "GitHubPackages"
-                // we moved some components from modelix/modelix to modelix/modelix.core but github packages
+                // we moved this project modelix.mps from modelix/modelix but github packages
                 // cannot handle this situation. basically we suffer from what is described here:
                 //     https://github.com/orgs/community/discussions/23474
                 // this is a simple workaround for the affected components.
                 // consequently, when obtaining these dependencies, the repo url is the old modelix/modelix one...
-                if (project.name in arrayOf("mps")){
+                if (project.name in arrayOf("mps")) {
                     url = uri("https://maven.pkg.github.com/modelix/modelix")
                     credentials {
                         username = project.findProperty("gpr.user") as? String ?: System.getenv("GITHUB_ACTOR")
-                        password = project.findProperty("gpr.universalkey") as? String ?: System.getenv("GHP_UNIVERSAL_TOKEN")
+                        password = project.findProperty("gpr.universalkey") as? String
+                                ?: System.getenv("GHP_UNIVERSAL_TOKEN")
                     }
                 } else {
                     url = uri("https://maven.pkg.github.com/modelix/modelix.mps")
