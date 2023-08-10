@@ -22,6 +22,7 @@ plugins {
 //
 // project details
 //
+
 group = "org.modelix"
 description = "modelix components providing MPS interoperation"
 
@@ -45,6 +46,7 @@ println("Version of MPS extension used in this project: ${libs.versions.mpsbase.
 //
 // subproject configuration
 //
+
 subprojects {
     apply(plugin = "maven-publish")
 
@@ -79,11 +81,12 @@ subprojects {
                 //     https://github.com/orgs/community/discussions/23474
                 // this is a simple workaround for the affected components.
                 // consequently, when obtaining these dependencies, the repo url is the old modelix/modelix one...
-                if (project.name in arrayOf("mps")){
+                if (project.name in arrayOf("mps")) {
                     url = uri("https://maven.pkg.github.com/modelix/modelix")
                     credentials {
                         username = project.findProperty("gpr.user") as? String ?: System.getenv("GITHUB_ACTOR")
-                        password = project.findProperty("gpr.universalkey") as? String ?: System.getenv("GHP_UNIVERSAL_TOKEN")
+                        password = project.findProperty("gpr.universalkey") as? String
+                                ?: System.getenv("GHP_UNIVERSAL_TOKEN")
                     }
                 } else {
                     url = uri("https://maven.pkg.github.com/modelix/modelix.mps")

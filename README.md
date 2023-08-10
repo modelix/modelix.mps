@@ -1,10 +1,12 @@
 # The Modelix Project
+
 The modelix project develops an open source platform for (meta-)models on the web. 
 We are native to the web and the cloud.
 
 For general information on modelix, please refer to the [official modelix homepage](https://modelix.org) as well as the [platform documentation](https://docs.modelix.org).
 
 For individual component specific documentation, see https://docs.modelix.org/modelix/latest/reference/components.html
+
 
 # modelix.mps
 
@@ -21,6 +23,7 @@ This project provides artifacts which depend on Jetbrains MPS.
 This means that artifact versions are prefixed with the corresponding MPS major and minor version number followed by our own patch version number. 
 For example, the `org.modelix.mps.model-server-sync-plugin` version `2021.2.103` is the `103rd` release which is compatible with `MPS 2021.2.*`.
 
+
 ### Branching and merging
 
 We currently support the following MPS versions in these branches:
@@ -34,6 +37,7 @@ All development is done for the default branch and merged into `mps/2020.3` via 
 From here we do cascading merges into the next higher version branch.
 This means the merge strategy is: `2020.3` -> `2021.1` -> `2021.2` -> `2021.3` -> `2022.2`.
 We automated as much as possible: Once a PR is merged on any `mps/20**` branch the next new PR for the subsequent version is created automatically.
+
 
 ## Releasing
 
