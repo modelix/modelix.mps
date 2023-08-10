@@ -2,7 +2,7 @@ name: Integration Tests
 run-name: Integration Tests
 
 on:
-  # build on pushes to release brannches
+  # build on pushes to release branches
   push:
     branches:
       - 'mps/20**'

@@ -2,7 +2,7 @@ name: Build
 run-name: Build
 
 on:
-  # build on pushes to release brannches
+  # build on pushes to release branches
   push:
     branches:
       - 'mps/20**'
