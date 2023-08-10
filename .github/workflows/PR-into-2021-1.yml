@@ -5,7 +5,10 @@ on:
     types:
       - closed
     branches:
-      - 'mps/2020.3'
+      - 'mps/2020.3'      
+  # allow manual execution
+  workflow_dispatch:
+
 jobs:
   merge-and-PR-into-2021-1:
     # only trigger if it was actually merged
