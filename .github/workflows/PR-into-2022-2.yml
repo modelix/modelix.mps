@@ -30,7 +30,7 @@ jobs:
           
           # actual merge operation
           git merge --no-ff origin/mps/2021.3 --
-          git checkout --ours -- conflictTest.file
+          git checkout --ours -- gradle/libs.versions.toml
           git add conflictTest.file
           git status
           git add -u
