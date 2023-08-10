@@ -1,6 +1,5 @@
-
 plugins {
-    id("com.github.node-gradle.node") version "2.2.4"
+    alias(libs.plugins.node.gradle) apply true
 }
 
 apply(plugin = "base")

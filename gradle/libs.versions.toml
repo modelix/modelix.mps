@@ -17,7 +17,7 @@ lib-jetty-server = "9.4.20.v20190813"
 # other
 jdom = "2.0.2"
 ant-junit = "1.10.1"
-
+nodeGradle = "2.2.4"
 
 [libraries]
 
@@ -43,3 +43,8 @@ modelix-model-api = { group = "org.modelix", name = "model-api", version.ref = "
 modelix-model-client = { group = "org.modelix", name = "model-client", version.ref = "modelix.core" }
 modelix-model-server-lib = { group = "org.modelix", name = "model-server-lib", version.ref = "modelix.core" }
 modelix-light-model-client = { group = "org.modelix", name = "light-model-client", version.ref = "modelix.core" }
+
+
+[plugins]
+
+node-gradle = { id = "com.github.node-gradle.node", version.ref = "nodeGradle" }
