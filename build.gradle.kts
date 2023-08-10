@@ -11,14 +11,13 @@ buildscript {
     }
 
     dependencies {
-        classpath("de.itemis.mps:mps-gradle-plugin:1.17.354.e921726")
+        classpath(libs.itemis.mps.gradle.plugin)
     }
 }
 
 plugins {
     `maven-publish`
 }
-
 
 //
 // project details
@@ -37,8 +36,11 @@ fun getAndWriteModelixVersion(): String {
     versionFile.writeText(modelixVersion)
     return modelixVersion
 }
+
 version = getAndWriteModelixVersion()
-println("Version: " + version)
+println("Version of this project: ${version}")
+println("Version of MPS used in this project: ${libs.versions.mpsbase.asProvider().get()}")
+println("Version of MPS extension used in this project: ${libs.versions.mpsbase.extensions.get()}")
 
 //
 // subproject configuration
@@ -72,7 +74,7 @@ subprojects {
             }
             maven {
                 name = "GitHubPackages"
-                // we moved some components from modelix/modelix to modelix/modelix.core but github packages
+                // we moved this project modelix.mps from modelix/modelix but github packages
                 // cannot handle this situation. basically we suffer from what is described here:
                 //     https://github.com/orgs/community/discussions/23474
                 // this is a simple workaround for the affected components.

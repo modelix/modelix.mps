@@ -1,6 +1,5 @@
 //import org.apache.tools.ant.taskdefs.condition.Os
 import de.itemis.mps.gradle.BuildLanguages
-import de.itemis.mps.gradle.GenerateLibrariesXml
 import de.itemis.mps.gradle.RunAntScript
 import de.itemis.mps.gradle.TestLanguages
 import groovy.util.Node
@@ -33,14 +32,7 @@ dependencies {
     mps(libs.mps)
     mpsArtifacts(libs.mps.extensions)
     extraLibs(libs.jdom)
-    modelServer(libs.modelix.modelserverincldependencies)
-}
-
-val generateLibrariesXml by tasks.registering(GenerateLibrariesXml::class) {
-    description = "Will read project libraries from projectlibraries.properties and generate libraries.xml in .mps directory. Libraries are loaded in mps during start."
-    defaults = rootProject.file("projectlibraries.properties")
-    destination = file("code/.mps/libraries.xml")
-    setOverrides(rootProject.file("projectlibraries.overrides.properties"))
+    modelServer(libs.modelix.modelserverwithependencies)
 }
 
 val resolveLibs by tasks.registering(Copy::class) {
@@ -71,10 +63,13 @@ val resolveMpsArtifacts by tasks.registering(Copy::class) {
 }
 
 tasks.register("setup") {
+    dependsOn(resolveLibs)
+    dependsOn(resolveMps)
     // We resolve MPS not for the users to use it but for the distribution packaging script to be able to refer to it.
     dependsOn(resolveMpsArtifacts)
-    dependsOn(generateLibrariesXml)
-    description = "Set up MPS project libraries. Libraries are read in from projectlibraries.properties file."
+    dependsOn(resolveModelServer)
+    dependsOn(copyJarsToMps)
+    description = "Set up everything and resolve all dependencies."
 }
 
 val defaultAntScriptArgs = listOf(
@@ -85,7 +80,7 @@ val defaultAntScriptArgs = listOf(
     "-Dant.build.javac.source=11",
     "-Dant.build.javac.target=11"
 )
-val buildScriptClasspath = antLib.fileCollection { true }
+val buildScriptClasspath: FileCollection = antLib.fileCollection { true }
 
 
 // -------- Model Client ----------------------
@@ -128,7 +123,7 @@ fun copyJarsDelta(conf: Configuration, excludedConf: Configuration, libFolder: F
 
     val modelClientResolved = conf.resolvedConfiguration
     for (artifact in modelClientResolved.resolvedArtifacts) {
-        val fromModelApi = jarsFromModelApi.get(artifactNameWithoutVersion(artifact))
+        val fromModelApi = jarsFromModelApi[artifactNameWithoutVersion(artifact)]
         if (fromModelApi != null) {
             if (fromModelApi.name == artifact.file.name) {
                 versionsFile.appendText(artifact.file.name + " (already part of org.modelix.model.api)\n")
@@ -256,7 +251,6 @@ val setExecutionModeToIntegrationTests by tasks.registering {
 
         val found = jvmArgs.children().find { it is Node && it.attribute("value") == "-Dmodelix.executionMode=INTEGRATION_TESTS" }
         if (found == null) {
-            val newJvmArg = Node(jvmArgs, "arg", mapOf("value" to "-Dmodelix.executionMode=INTEGRATION_TESTS"))
             val printer = groovy.xml.XmlNodePrinter(buildFile.printWriter())
             printer.print(xml)
         }
