@@ -1,4 +1,3 @@
-//import org.apache.tools.ant.taskdefs.condition.Os
 import de.itemis.mps.gradle.BuildLanguages
 import de.itemis.mps.gradle.RunAntScript
 import de.itemis.mps.gradle.TestLanguages
