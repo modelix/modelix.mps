@@ -37,7 +37,7 @@ jobs:
         run: |
           # strip the title of previous automatic PR content
           NEW_TITLE='${{ github.event.pull_request.title }}'
-          NEW_TITLE="${NEW_TITLE// (2020.3 -> 2021.1)}"
+          NEW_TITLE="${NEW_TITLE// (2021.1 -> 2021.2)}"
           echo "NEW_TITLE=$NEW_TITLE" >> $GITHUB_ENV
 
       # create a PR based on the merge

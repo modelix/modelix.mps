@@ -3,9 +3,10 @@ run-name: Publish
 
 on:
   # release on tagging
-  #push:
-  #  tags:
-  #    - 'mps/20**'
+  push:
+    tags:
+      - 'mps/2020.**'
+      - 'mps/2021.**'
 
   # allow manual execution just in case
   workflow_dispatch:
