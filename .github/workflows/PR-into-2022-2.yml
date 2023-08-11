@@ -1,14 +1,11 @@
 name: Merge and PR into 2022.2
 run-name: Merge 2021.3 -> 2022.2
 on:
-# disabled due to current incompatibility with mps >2021.*
-#  pull_request_target:
-#    types:
-#      - closed
-#    branches:
-#      - 'mps/2021.3'
-  workflow_dispatch:
-
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - 'mps/2021.3'
 
 jobs:
   merge-and-PR-into-2022-2:
