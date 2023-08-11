@@ -30,7 +30,7 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           
           # actual merge operation
-          git merge --no-ff --message "Merge 2020.3 -> 2021.1" origin/mps/2020.3 -- || echo "Merge failed. Please merge manually!" ; exit 1
+          git merge --no-ff --message "Merge 2020.3 -> 2021.1" origin/mps/2020.3 -- || ( echo "Merge failed. Please merge manually!" ; exit 1 )
 
       # create a PR based on the merge
       - name: Create PR for MPS 2021.1
