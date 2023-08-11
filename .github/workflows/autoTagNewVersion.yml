@@ -1,15 +1,21 @@
 name: TagNewVersion
+run-name: Tag All Branches With New Version
 
 on:
-  workflow_run:
-    workflows: [Merge and PR into 2022.2]
-    types: [completed]
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - 'mps/2022.2'
 
   # allow manual execution just in case
   workflow_dispatch:
 
 jobs:
   tagBranch:
+    # only trigger if the PR was actually merged
+    if: github.event.pull_request.merged == true
+
     permissions:
       contents: write
 
@@ -19,6 +25,6 @@ jobs:
         with:
           ref: '${{ github.ref_name }}'
           fetch-depth: 0
-
+          
       - name: Set Tags
         run: .github/workflows/tagAllBranchesWithIncrementedVersion.sh
