@@ -33,8 +33,8 @@ val modelServerDir = File(artifactsDir, "model-server")
 
 dependencies {
     antLib(libs.ant.junit)
-    mps(libs.mps)
-    mpsArtifacts(libs.mps.extensions)
+    mps(mpsCatalog.mps)
+    mpsArtifacts(mpsCatalog.mps.extensions)
     extraLibs(libs.jdom)
     modelServer(libs.modelix.modelserverwithependencies)
 }
