@@ -31,19 +31,18 @@ We currently support the following MPS versions in these branches:
 * `mps/2021.1`
 * `mps/2021.2`
 * `mps/2021.3`
-* `mps/2022.2`
+* ~~`mps/2022.2`~~ (currently not supported)
 
 All development is done for the default branch and merged into `mps/2020.3` via a pull-request.
 From here we do cascading merges into the next higher version branch.
-This means the merge strategy is: `2020.3` -> `2021.1` -> `2021.2` -> `2021.3` -> `2022.2`.
-We automated as much as possible: Once a PR is merged on any `mps/20**` branch the next new PR for the subsequent version is created automatically.
-
+This means the merge strategy is: `2020.3` -> `2021.1` -> `2021.2` -> `2021.3` ~~-> `2022.2`~~.
+We automated as much as possible: A new PR for the subsequent version is created automatically once a PR is merged on any `mps/2020.**` or `mps/2021.**` branch.
 
 ## Releasing
 
-When the last branch (`mps/2022.2`) has a successful merge, a new release is done.
-For this new git tags is added to each branch (e.g. `2020.3.123`, `2021.1.123`, `2021.2.123`, ...)
-After this, each branch is published individually, thus providing MPS version specific plugins.
+When the last branch (`mps/2021.3`) was successfully merged, a new release is created.
+First, new git tags are added to each branch (e.g. `2020.3.123`, `2021.1.123`, `2021.2.123`, ...).
+Second, each branch is published individually, thus providing MPS version specific plugins.
 
 
 # Authors
