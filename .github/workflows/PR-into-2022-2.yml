@@ -6,6 +6,7 @@ on:
       - closed
     branches:
       - 'mps/2021.3'
+
 jobs:
   merge-and-PR-into-2022-2:
     # only trigger if it was actually merged
@@ -29,7 +30,7 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           
           # actual merge operation
-          git merge --no-ff --message "Merge 2021.3 -> 2022.2" origin/mps/2021.3 --
+          git merge --no-ff --message "Merge 2021.3 -> 2022.2" origin/mps/2021.3 -- || echo "Merge failed. Please merge manually!" ; exit 1
 
       # actually merge from the previous branch
       - name: Prepare environment variables for PR

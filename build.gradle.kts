@@ -11,7 +11,7 @@ buildscript {
     }
 
     dependencies {
-        classpath(libs.itemis.mps.gradle.plugin)
+        classpath(mpsCatalog.itemis.mps.gradle.plugin)
     }
 }
 
@@ -32,7 +32,7 @@ fun getAndWriteModelixVersion(): String {
     modelixVersion = if (versionFile.exists()) {
         versionFile.readText().trim()
     } else {
-        "${libs.versions.mpsbase.asProvider().get()}-" + SimpleDateFormat("yyyyMMddHHmm").format(java.util.Date()) + "-SNAPSHOT"
+        "${mpsCatalog.versions.mpsbase.asProvider().get()}-" + SimpleDateFormat("yyyyMMddHHmm").format(java.util.Date()) + "-SNAPSHOT"
     }
     versionFile.writeText(modelixVersion)
     return modelixVersion
@@ -40,8 +40,8 @@ fun getAndWriteModelixVersion(): String {
 
 version = getAndWriteModelixVersion()
 println("Version of this project: ${version}")
-println("Version of MPS used in this project: ${libs.versions.mpsbase.asProvider().get()}")
-println("Version of MPS extension used in this project: ${libs.versions.mpsbase.extensions.get()}")
+println("Version of MPS used in this project: ${mpsCatalog.versions.mpsbase.asProvider().get()}")
+println("Version of MPS extension used in this project: ${mpsCatalog.versions.mpsbase.extensions.get()}")
 
 //
 // subproject configuration
