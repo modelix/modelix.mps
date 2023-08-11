@@ -12,7 +12,8 @@
 #
 
 export previousNextVersion=0
-for versionPrefix in "2020.3" "2021.1" "2021.2" "2021.3" "2022.2"; do
+# tagging for 2022.2 disabled due to current incompatibility with mps >2021.* (java 17)
+for versionPrefix in "2020.3" "2021.1" "2021.2" "2021.3"; do
     git switch "mps/${versionPrefix}"
 
     #calculate the next version number
