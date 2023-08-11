@@ -30,3 +30,7 @@ source_gen.caches
 **/src/*/kotlin_gen
 **/.ideaconfig
 **/.mpsconfig
+
+# this file is highly specific for each branch.
+# all changes to it here have to be done manually and with care
+gradle/mps.versions.toml

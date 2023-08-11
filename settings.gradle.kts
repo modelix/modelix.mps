@@ -11,3 +11,11 @@ pluginManagement {
 
 include("mps")
 include("ui-client")
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("mpsCatalog") {
+            from(files("gradle/mps.versions.toml"))
+        }
+    }
+}

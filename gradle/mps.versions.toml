@@ -1,0 +1,12 @@
+[versions]
+
+# MPS - specific for each MPS version/branch
+mpsbase = "2021.2.5"
+mpsbase-extensions = "2021.2.2569.a5e1b8d"
+mpsGradlePlugin = "1.17.354.e921726"
+
+[libraries]
+
+mps = { group = "com.jetbrains", name = "mps", version.ref = "mpsbase" }
+mps-extensions = { group = "de.itemis.mps", name = "extensions", version.ref = "mpsbase-extensions" }
+itemis-mps-gradle-plugin = { group = "de.itemis.mps", name="mps-gradle-plugin", version.ref = "mpsGradlePlugin" }
