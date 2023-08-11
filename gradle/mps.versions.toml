@@ -1,8 +1,8 @@
 [versions]
 
 # MPS - specific for each MPS version/branch
-mpsbase = "2021.3.2"
-mpsbase-extensions = "2021.3.2570.01358a5"
+mpsbase = "2022.2"
+mpsbase-extensions = "2022.2.2566.9be95c8"
 mpsGradlePlugin = "1.17.354.e921726"
 
 [libraries]
