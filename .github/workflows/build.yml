@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - 'mps/20**'
+      - 'merge/20**'
       
   # build on new PRs
   pull_request:
