@@ -6,7 +6,7 @@ on:
     types:
       - closed
     branches:
-      - 'mps/2022.2'
+      - 'mps/2021.3'
 
   # allow manual execution just in case
   workflow_dispatch:
