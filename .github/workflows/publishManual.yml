@@ -1,5 +1,5 @@
 name: Publish Manual
-run-name: Publish ${{ inputs.MPS_VERSION }}.${{ inputs.TAG_NUMBER }}
+run-name: Publish ${{ inputs.TAG_TO_RELEASE }}
 
 on:
   workflow_dispatch:
