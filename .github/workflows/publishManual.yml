@@ -1,14 +1,15 @@
 name: Publish
-run-name: Publish ${{ github.ref_name }}
+run-name: Publish ${{ inputs.MPS_VERSION }}.${{ inputs.TAG_NUMBER }}
 
 on:
-  # release on tagging
-  push:
-    tags:
-      - '2020.3.**'
-      - '2021.1.**'
-      - '2021.2.**'
-      - '2021.3.**'
+  workflow_dispatch:
+    inputs:
+        MPS_VERSION:
+          description: The MPS version (aka. prefix) of the TAG to release
+          required: true
+        TAG_NUMBER:
+          description: The patch version (aka. suffix) of the TAG to release
+          required: true
 
 jobs:
   newRelease:
@@ -17,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: "${{ inputs.MPS_VERSION }}.${{ inputs.TAG_NUMBER }}"
 
       - name: Set up JDK 11
         uses: actions/setup-java@v2
@@ -48,3 +51,4 @@ jobs:
           DOCKER_HUB_KEY: ${{ secrets.DOCKER_HUB_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: cd docker && ./docker-build-projector.sh
+
