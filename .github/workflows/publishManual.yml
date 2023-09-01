@@ -1,14 +1,11 @@
-name: Publish
+name: Publish Manual
 run-name: Publish ${{ inputs.MPS_VERSION }}.${{ inputs.TAG_NUMBER }}
 
 on:
   workflow_dispatch:
     inputs:
-        MPS_VERSION:
-          description: The MPS version (aka. prefix) of the TAG to release
-          required: true
-        TAG_NUMBER:
-          description: The patch version (aka. suffix) of the TAG to release
+        TAG_TO_RELEASE:
+          description: The TAG which should be released
           required: true
 
 jobs:
@@ -19,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: "${{ inputs.MPS_VERSION }}.${{ inputs.TAG_NUMBER }}"
+          ref: "${{ inputs.TAG_TO_RELEASE }}"
 
       - name: Set up JDK 11
         uses: actions/setup-java@v2
@@ -28,7 +25,7 @@ jobs:
           java-version: '11'
 
       - name: Use tag name as version
-        run: echo "${GITHUB_REF#refs/*/}" > modelix.version
+        run: echo "${{ inputs.TAG_TO_RELEASE }}" > modelix.version
 
       - name: Build and Publish Maven
         env:
