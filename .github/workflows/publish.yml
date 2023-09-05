@@ -42,5 +42,4 @@ jobs:
         env:
           DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
           DOCKER_HUB_KEY: ${{ secrets.DOCKER_HUB_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: cd docker && ./docker-build-projector.sh
