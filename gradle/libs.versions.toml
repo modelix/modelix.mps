@@ -3,7 +3,7 @@ modelix-core = "2.10.5"
 
 # jersey related
 lib-jersey = "2.29.1"
-lib-jakarta-xml = "2.3.2"
+lib-jakarta-xml = "4.0.0"
 lib-jakarta-activation = "1.2.1"
 
 # jetty TODO
