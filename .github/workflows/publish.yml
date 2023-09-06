@@ -51,6 +51,5 @@ jobs:
           DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
           DOCKER_HUB_KEY: ${{ secrets.DOCKER_HUB_KEY }}
         run: |
-          set -x
           cd docker 
           ./docker-build-projector.sh
