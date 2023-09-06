@@ -32,6 +32,7 @@ fun getAndWriteModelixVersion(): String {
     modelixVersion = if (versionFile.exists()) {
         versionFile.readText().trim()
     } else {
+        println("No version file exits, generating SNAPSHOT version")
         "${mpsCatalog.versions.mpsbase.asProvider().get()}-" + SimpleDateFormat("yyyyMMddHHmm").format(java.util.Date()) + "-SNAPSHOT"
     }
     versionFile.writeText(modelixVersion)
