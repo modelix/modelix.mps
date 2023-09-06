@@ -33,6 +33,8 @@ jobs:
           nextVersion=$((lastVersion+1))
           echo "nextVersion=$nextVersion" >> $GITHUB_ENV
 
+      - name: Switch to branch mps/2020.3
+        run: git switch mps/2020.3
       - name: Tag 2020.3 with new version
         uses: anothrNick/github-tag-action@1.64.0
         env:
