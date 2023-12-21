@@ -7,7 +7,6 @@
   </languages>
   <imports>
     <import index="4dhu" ref="r:17a7af0b-7a93-4688-b13e-195872d8e289(de.q60.mps.web.aspect.behavior)" />
-    <import index="dj5d" ref="r:8bca245c-17c6-44f4-9367-ad6ce25cabf5(de.q60.mps.shadowmodels.runtimelang.structure)" />
     <import index="jh6v" ref="r:f2f39a18-fd23-4090-b7f2-ba8da340eec2(org.modelix.model.repositoryconcepts.structure)" />
     <import index="79yt" ref="r:ded575ba-957a-4f7f-89f0-d9fc02ad1b0c(org.modelix.aspect.structure)" implicit="true" />
   </imports>
