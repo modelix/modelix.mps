@@ -26,7 +26,6 @@
     <dependency reexport="false">c5e5433e-201f-43e2-ad14-a6cba8c80cd6(org.modelix.model.mpsplugin)</dependency>
     <dependency reexport="false">db058d09-86d2-48ce-b33c-595801a97e6c(org.modelix.ui.state)</dependency>
     <dependency reexport="false">5622e615-959d-4843-9df6-ef04ee578c18(org.modelix.model.mpsadapters)</dependency>
-    <dependency reexport="false">0a2651ab-f212-45c2-a2f0-343e76cbc26b(org.modelix.model.client)</dependency>
     <dependency reexport="false">cc99dce1-49f3-4392-8dbf-e22ca47bd0af(org.modelix.model.api)</dependency>
   </dependencies>
   <languageVersions>
